@@ -5,7 +5,7 @@ import random
 import matplotlib.pyplot as plt
 from newspaper import Article
 from transformers import BertTokenizer, BertForSequenceClassification
-from transformers import AdamW
+from torch.optim import AdamW
 from sklearn.metrics import classification_report
 import torch
 from torch.utils.data import DataLoader, Dataset
