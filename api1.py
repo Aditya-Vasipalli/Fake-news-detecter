@@ -43,6 +43,13 @@ joblib.dump(vectorizer, "vectorizer.pkl")
 
 print("Model and vectorizer saved successfully!")
 
+# Initialize SHAP explainer
+explainer = shap.Explainer(model.predict, vectorizer.transform)
+
+# Save the SHAP explainer
+joblib.dump(explainer, "explainer.pkl")
+print("SHAP explainer saved successfully!")
+
 # Evaluate
 y_pred = model.predict(X_test_vec)
 print("\n=== Classification Report ===\n")
@@ -57,7 +64,6 @@ print(f"\n🔍 Sample Text:\n{sample_text[:500]}...\n")
 print(f"True Label: {'Fake' if true_label == 1 else 'Real'}")
 
 # SHAP Explainability
-explainer = shap.Explainer(model, X_train_vec)
 sample_text_vectorized = vectorizer.transform([sample_text])
 shap_values = explainer(sample_text_vectorized)
 

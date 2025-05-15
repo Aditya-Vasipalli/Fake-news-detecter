@@ -75,7 +75,7 @@ plt.tight_layout()
 plt.show()
 
 # URL of the article to analyze
-url = 'https://www.bbc.com/news/articles/c2kv93y4289o'
+url = 'https://www.ndtv.com/india-news/blusmart-co-founder-puneet-jaggi-detained-in-case-related-to-gensol-engineering-sources-8247960'
 
 # Fetch and parse the article
 article = Article(url)

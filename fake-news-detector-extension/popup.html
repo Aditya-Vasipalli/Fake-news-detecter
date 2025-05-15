@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fake News Detector</title>
+    <style>
+      body { font-family: Arial, sans-serif; width: 300px; padding: 10px; }
+      #result { margin-top: 10px; }
+      input, textarea { width: 100%; margin-bottom: 8px; }
+      button { width: 100%; }
+    </style>
+  </head>
+  <body>
+    <h3>Fake News Detector</h3>
+    <input type="text" id="url-input" placeholder="Paste article URL (optional)" />
+    <textarea id="text-input" rows="4" placeholder="Or paste article text here"></textarea>
+    <button id="analyze-button">Analyze</button>
+    <div id="result"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
