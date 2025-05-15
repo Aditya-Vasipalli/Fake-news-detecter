@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } catch (error) {
                 resultDiv.textContent = 'Error analyzing text. Please try again.';
             }
+            
         } else {
             resultDiv.textContent = 'Please enter some text to analyze.';
         }

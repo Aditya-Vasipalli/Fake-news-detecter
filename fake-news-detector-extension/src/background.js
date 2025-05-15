@@ -16,6 +16,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 
+
 // Function to analyze text using the fake news detection API
 async function analyzeText(text) {
     const response = await fetch("http://localhost:5000/analyze", {

@@ -20,6 +20,7 @@ const analyzeArticle = async (articleText) => {
     } catch (error) {
         console.error('Fetch error:', error);
     }
+    
 };
 
 const displayResult = (result) => {
