@@ -54,7 +54,6 @@ fake-news-detector-extension/
 
 ## Notes
 - The backend must be running for the extension to work.
-- Only the files in the root and `src/` are needed. You can delete `public/`, `styles/`, and `api/` folders if not used.
 - The extension only works on news article pages (not on all websites).
 
 ## License
