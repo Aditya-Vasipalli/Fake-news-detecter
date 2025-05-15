@@ -1,0 +1,8 @@
+# Ignore build and system files
+*.pyc
+__pycache__/
+.DS_Store
+node_modules/
+dist/
+build/
+.env
