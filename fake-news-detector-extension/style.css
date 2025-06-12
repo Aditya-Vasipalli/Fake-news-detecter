@@ -1,0 +1,208 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  width: 340px;
+  padding: 24px 16px 16px 16px;
+  background: #f7f7fa;
+  margin: 0;
+  text-align: center;
+}
+h2 {
+  margin-bottom: 24px;
+  color: #222;
+  letter-spacing: 1px;
+}
+.spinner-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 18px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#analyze-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f8cff 60%, #a6c8ff 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.12);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  z-index: 2;
+  opacity: 1;
+}
+#analyze-button.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.fr-label {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #eaf3ff;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #2e6eea22;
+  z-index: 2;
+  transition: opacity 0.2s;
+}
+#analyze-button.loading .fr-label {
+  opacity: 0.3;
+}
+.spinner-fancy {
+  display: none;
+  position: absolute;
+  left: 0; top: 0;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #4f8cff 0 40deg,
+    transparent 40deg 80deg,
+    #a6c8ff 80deg 160deg,
+    transparent 160deg 200deg,
+    #eaf3ff 200deg 280deg,
+    transparent 280deg 320deg,
+    #4f8cff 320deg 360deg
+  );
+  animation: spin-fancy 1s linear infinite;
+  opacity: 0.95;
+  filter: blur(0.5px) brightness(1.2);
+  box-shadow: 0 0 16px 4px #4f8cff55;
+  z-index: 3;
+}
+.spinner-fancy.show {
+  display: block;
+}
+.spinner-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
+  border: 10px solid #1a357a;         /* Thicker border */
+  border-top: 10px solid #4f8cff;     /* Thicker border */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 3;
+  opacity: 0.85;
+  pointer-events: none;
+}
+#analyze-button:active {
+  background: linear-gradient(135deg, #2e6eea 60%, #4f8cff 100%);
+}
+#toggle-text-input {
+  font-size: 14px;
+  color: #4f8cff;
+  margin-bottom: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+#text-input {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 15px;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border 0.2s;
+  display: none;
+}
+#text-input:focus {
+  border: 1.5px solid #4f8cff;
+  outline: none;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin-top: -28px;
+  margin-left: -28px;
+  border: 5px solid #1a357a;
+  border-top: 5px solid #4f8cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.85;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+@keyframes spin-fancy {
+  0% { transform: rotate(0deg) scale(1);}
+  50% { transform: rotate(180deg) scale(1.08);}
+  100% { transform: rotate(360deg) scale(1);}
+}
+#result {
+  margin-top: 16px;
+  padding: 0;
+}
+.result-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(79,140,255,0.07);
+  padding: 16px 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 15px;
+  color: #222;
+  word-break: break-word;
+}
+.prediction-real {
+  color: #1aaf5d;
+  font-weight: bold;
+}
+.prediction-fake {
+  color: #e74c3c;
+  font-weight: bold;
+}
+.shap-keywords {
+  margin: 10px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+.shap-keywords li {
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+.shap-up { color: #e74c3c; }
+.shap-down { color: #1aaf5d; }
+.shap-word {
+  font-weight: bold;
+  background: #f2f6ff;
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-right: 4px;
+}
+.confidence-bar {
+  height: 10px;
+  border-radius: 5px;
+  background: #e3e8ee;
+  margin: 8px 0 12px 0;
+  overflow: hidden;
+  display: flex;
+}
+.confidence-real {
+  background: #1aaf5d;
+  height: 100%;
+  transition: width 0.4s;
+}
+.confidence-fake {
+  background: #e74c3c;
+  height: 100%;
+  transition: width 0.4s;
+}

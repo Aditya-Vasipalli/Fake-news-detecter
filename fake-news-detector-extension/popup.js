@@ -1,24 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
   const analyzeButton = document.getElementById('analyze-button');
   const resultDiv = document.getElementById('result');
-  const urlInput = document.getElementById('url-input');
+  const spinner = document.getElementById('spinner');
 
-  // Autofill the URL input with the current tab's URL
+  let currentTabUrl = null;
+
+  // Get the current tab's URL
   if (chrome && chrome.tabs) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       if (tabs && tabs.length > 0) {
-        urlInput.value = tabs[0].url;
+        currentTabUrl = tabs[0].url;
       }
     });
   }
 
   analyzeButton.addEventListener('click', async () => {
-    const url = urlInput.value.trim();
+    analyzeButton.classList.add('loading');
+    const url = currentTabUrl;
     if (!url) {
-      resultDiv.textContent = 'Please enter a URL.';
+      resultDiv.textContent = 'Could not get the current tab URL.';
       return;
     }
 
+    spinner.style.display = 'block'; // Show spinner
     resultDiv.textContent = 'Analyzing...';
 
     try {
@@ -60,6 +64,23 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (error) {
       resultDiv.textContent = 'Error: Could not connect to backend.';
       console.error(error);
+    } finally {
+      spinner.style.display = 'none'; // Hide spinner after fetch
+      analyzeButton.classList.remove('loading');
+    }
+  });
+
+  const toggleTextInput = document.getElementById('toggle-text-input');
+  const textInput = document.getElementById('text-input');
+
+  toggleTextInput.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (textInput.style.display === 'block') {
+      textInput.style.display = 'none';
+      toggleTextInput.textContent = 'Or paste text instead';
+    } else {
+      textInput.style.display = 'block';
+      toggleTextInput.textContent = 'Hide text input';
     }
   });
 });

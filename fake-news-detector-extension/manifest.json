@@ -23,6 +23,12 @@
       "js": ["src/content.js"]
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["style.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "icons": {
     "16": "icon.jpg",
     "48": "icon.jpg",
