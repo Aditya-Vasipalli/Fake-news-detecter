@@ -6,6 +6,10 @@ This Chrome extension allows you to detect fake news on any news article page. I
 - **Red highlights**: Words pushing the prediction toward "Fake" (intensity = SHAP value)
 - **Green highlights**: Words pushing the prediction toward "Real" (intensity = SHAP value)
 
+![image](https://github.com/user-attachments/assets/348d829b-1065-4a7f-914b-4ae689608567)
+Demo image taken from <a href="https://indianexpress.com/article/business/aviation/india-cancels-security-clearance-turkish-celebi-aviation-security-airports-10008586/ ">The Indian Express</a>, used for academic demonstration purposes only.
+
+
 ## How it Works
 1. **Backend**: A FastAPI server runs locally, serving a `/predict` endpoint that takes a news article URL, predicts if it's fake or real, and returns SHAP explanations. It also serves a `/plot` endpoint for the SHAP bar plot image.
 2. **Extension**: The extension popup autofills the current tab's URL. When you click "Analyze", it sends the URL to the backend, displays the prediction, and highlights the most influential words on the page.
