@@ -55,7 +55,9 @@ fake-news-detector-extension/
     ├── background.js
     ├── content.js  # Highlights words on the page
 ```
-
+##DEPLOYMENT:
+- Model available at: https://huggingface.co/aditya-vasipalli/fake-news-detector
+    
 ## Notes
 - The backend must be running for the extension to work.
 - The extension only works on news article pages (not on all websites).
