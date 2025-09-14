@@ -8,3 +8,6 @@ build/
 .env
 *.pth
 *.safetensors
+Kevin Wang
+liar_dataset-master/
+paper_stuff/

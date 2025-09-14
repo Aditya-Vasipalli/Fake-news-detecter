@@ -47,7 +47,7 @@ class DataverseNLBenchmark:
         print("✅ Model loaded successfully!")
         
         # Dataset paths
-        self.dataset_folder = "C:/Users/vasip/Code/Fake-news-detecter/dataverseNL/Kevin Wang/WEBAPP/datasets"
+        self.dataset_folder = "C:/Users/vasip/Code/Fake-news-detecter/Kevin Wang/WEBAPP/datasets"
         
     def detect_dataset_format(self, df, filename):
         """Detect the format and column structure of each dataset"""
@@ -236,7 +236,16 @@ class DataverseNLBenchmark:
             with torch.no_grad():
                 outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
                 batch_probabilities = torch.softmax(outputs.logits, dim=-1)
-                batch_predictions = torch.argmax(batch_probabilities, dim=-1)
+                
+                # Apply higher threshold for fake news classification (70% confidence required)
+                # This reduces false positives where real news is incorrectly labeled as fake
+                FAKE_THRESHOLD = 0.70
+                
+                # Create predictions with threshold
+                fake_probs = batch_probabilities[:, 0]  # Probability of fake (class 0)
+                batch_predictions = torch.where(fake_probs > FAKE_THRESHOLD, 
+                                               torch.tensor(0, device=self.device),  # Fake
+                                               torch.tensor(1, device=self.device))  # Real
                 
                 predictions.extend(batch_predictions.cpu().numpy())
                 probabilities.extend(batch_probabilities.cpu().numpy())

@@ -118,9 +118,13 @@ class LIARBenchmark:
         with torch.no_grad():
             outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
             probabilities = torch.softmax(outputs.logits, dim=-1)
-            prediction = torch.argmax(probabilities, dim=-1)
             
-        return prediction.cpu().numpy()[0], probabilities.cpu().numpy()[0]
+            # Apply higher threshold for fake news classification (70% confidence required)
+            FAKE_THRESHOLD = 0.70
+            fake_prob = probabilities[0, 0]  # Probability of fake (class 0)
+            prediction = 0 if fake_prob > FAKE_THRESHOLD else 1  # 0=Fake, 1=Real
+            
+        return prediction, probabilities.cpu().numpy()[0]
     
     def predict_batch(self, texts, batch_size=16, max_length=512):
         """Predict batch of texts efficiently"""
@@ -149,7 +153,13 @@ class LIARBenchmark:
             with torch.no_grad():
                 outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
                 batch_probabilities = torch.softmax(outputs.logits, dim=-1)
-                batch_predictions = torch.argmax(batch_probabilities, dim=-1)
+                
+                # Apply higher threshold for fake news classification (70% confidence required)
+                FAKE_THRESHOLD = 0.70
+                fake_probs = batch_probabilities[:, 0]  # Probability of fake (class 0)
+                batch_predictions = torch.where(fake_probs > FAKE_THRESHOLD, 
+                                               torch.tensor(0, device=self.device),  # Fake
+                                               torch.tensor(1, device=self.device))  # Real
                 
                 predictions.extend(batch_predictions.cpu().numpy())
                 probabilities.extend(batch_probabilities.cpu().numpy())
@@ -428,10 +438,18 @@ if __name__ == "__main__":
     main()
 
 """
-OVERALL BENCHMARK SUMMARY
+OVERALL BENCHMARK SUMMARY with 50% FAKE news threshold
 ============================================================
 TRAIN        | Samples: 10240 | Accuracy: 0.6415 | F1: 0.5127
 VALIDATION   | Samples:  1284 | Accuracy: 0.6690 | F1: 0.5490
 TEST         | Samples:  1267 | Accuracy: 0.6401 | F1: 0.5095
+
+============================================================
+
+OVERALL BENCHMARK SUMMARY with 70% FAKE news threshold
+============================================================
+TRAIN        | Samples: 10240 | Accuracy: 0.6416 | F1: 0.5135
+VALIDATION   | Samples:  1284 | Accuracy: 0.6698 | F1: 0.5507
+TEST         | Samples:  1267 | Accuracy: 0.6369 | F1: 0.5079
 
 """

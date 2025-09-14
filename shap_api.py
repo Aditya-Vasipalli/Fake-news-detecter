@@ -201,11 +201,18 @@ def predict_article(url: str = Query(..., description="URL of the news article")
         # Get BERT prediction using sliding window approach
         prediction_proba = bert_predict_proba([text])[0]
         
-        # Determine final prediction
-        prediction = 0 if prediction_proba[0] > prediction_proba[1] else 1  # 0=Fake, 1=Real
+        # Determine final prediction with higher threshold for fake news (70% confidence required)
+        # This reduces false positives where real news is incorrectly labeled as fake
+        FAKE_THRESHOLD = 0.70  # Require 70% confidence to classify as fake
+        
+        if prediction_proba[0] > FAKE_THRESHOLD:  # High confidence fake
+            prediction = 0  # Fake
+        else:
+            prediction = 1  # Real (default to real unless highly confident it's fake)
+            
         confidence = max(prediction_proba[0], prediction_proba[1])
         
-        print(f"🎯 Prediction: {'Real' if prediction == 1 else 'Fake'} (Confidence: {confidence:.3f})")
+        print(f"🎯 Prediction: {'Real' if prediction == 1 else 'Fake'} (Confidence: {confidence:.3f}, Fake threshold: {FAKE_THRESHOLD})")
 
         # Get token importance (use first chunk for keywords if long text)
         if word_count > 400:
@@ -265,8 +272,15 @@ def predict_text_directly(payload: dict = Body(...)):
         # Get BERT prediction using sliding window approach
         prediction_proba = bert_predict_proba([text])[0]
         
-        # Determine final prediction
-        prediction = 0 if prediction_proba[0] > prediction_proba[1] else 1  # 0=Fake, 1=Real
+        # Determine final prediction with higher threshold for fake news (70% confidence required)
+        # This reduces false positives where real news is incorrectly labeled as fake
+        FAKE_THRESHOLD = 0.70  # Require 70% confidence to classify as fake
+        
+        if prediction_proba[0] > FAKE_THRESHOLD:  # High confidence fake
+            prediction = 0  # Fake
+        else:
+            prediction = 1  # Real (default to real unless highly confident it's fake)
+            
         confidence = max(prediction_proba[0], prediction_proba[1])
         
         return {

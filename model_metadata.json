@@ -2,12 +2,12 @@
   "model_name": "bert-base-uncased",
   "num_labels": 2,
   "max_length": 256,
-  "best_val_accuracy": 0.9940730837789661,
+  "best_val_accuracy": 0.9462081576674963,
   "epoch": 2,
-  "training_samples": 17959,
-  "validation_samples": 22440,
-  "test_samples": 4499,
+  "training_samples": 157494,
+  "validation_samples": 19687,
+  "test_samples": 19687,
   "overfitting_detected": true,
-  "train_val_gap": 0.004764102209836363,
+  "train_val_gap": 0.01773415002481138,
   "regularization": "aggressive"
 }
