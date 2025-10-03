@@ -1,0 +1,40 @@
+{
+  "dataset": "FEVER",
+  "evaluation_date": "2025-10-03T14:30:13.412006",
+  "dataset_size": 19998,
+  "processing_time_seconds": 395.36559295654297,
+  "metrics": {
+    "accuracy": 0.35183518351835186,
+    "weighted_precision": 0.5591663264583085,
+    "weighted_recall": 0.35183518351835186,
+    "weighted_f1": 0.23138541453197728
+  },
+  "per_class_metrics": {
+    "fake": {
+      "precision": 0.6719330855018587,
+      "recall": 0.05423042304230423,
+      "f1": 0.10036091060521932,
+      "support": 13332
+    },
+    "real": {
+      "precision": 0.3336328083712081,
+      "recall": 0.9470447044704471,
+      "f1": 0.4934344223854932,
+      "support": 6666
+    }
+  },
+  "confusion_matrix": [
+    [
+      723,
+      12609
+    ],
+    [
+      353,
+      6313
+    ]
+  ],
+  "label_distribution": {
+    "fake": 13332,
+    "real": 6666
+  }
+}

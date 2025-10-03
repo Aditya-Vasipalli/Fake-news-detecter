@@ -7,7 +7,6 @@
   "training_samples": 157494,
   "validation_samples": 19687,
   "test_samples": 19687,
-  "overfitting_detected": true,
   "train_val_gap": 0.01773415002481138,
   "regularization": "aggressive"
 }

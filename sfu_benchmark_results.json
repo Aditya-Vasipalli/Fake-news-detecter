@@ -1,0 +1,118 @@
+{
+  "emergent": {
+    "dataset_size": 90,
+    "label_distribution": {
+      "real": 14,
+      "fake": 76
+    },
+    "metrics": {
+      "accuracy": 0.5666666666666667,
+      "weighted_precision": 0.8219363351476167,
+      "weighted_recall": 0.5666666666666667,
+      "weighted_f1": 0.6237957478073197,
+      "precision_per_class": [
+        0.9302325581395349,
+        0.23404255319148937
+      ],
+      "recall_per_class": [
+        0.5263157894736842,
+        0.7857142857142857
+      ],
+      "f1_per_class": [
+        0.6722689075630253,
+        0.36065573770491804
+      ],
+      "confusion_matrix": [
+        [
+          40,
+          36
+        ],
+        [
+          3,
+          11
+        ]
+      ]
+    },
+    "timestamp": "2025-10-03T15:30:14.642466"
+  },
+  "politifact": {
+    "dataset_size": 24893,
+    "label_distribution": {
+      "real": 12704,
+      "fake": 12189
+    },
+    "metrics": {
+      "accuracy": 0.4975695978789218,
+      "weighted_precision": 0.5032193512816259,
+      "weighted_recall": 0.4975695978789218,
+      "weighted_f1": 0.46951374593507694,
+      "precision_per_class": [
+        0.49125893347993405,
+        0.5146949127256453
+      ],
+      "recall_per_class": [
+        0.7331200262531791,
+        0.27156801007556675
+      ],
+      "f1_per_class": [
+        0.588301129069423,
+        0.35554181480908953
+      ],
+      "confusion_matrix": [
+        [
+          8936,
+          3253
+        ],
+        [
+          9254,
+          3450
+        ]
+      ]
+    },
+    "timestamp": "2025-10-03T16:01:45.456681"
+  },
+  "snopes": {
+    "dataset_size": 9591,
+    "label_distribution": {
+      "real": 1619,
+      "fake": 7972
+    },
+    "metrics": {
+      "accuracy": 0.513502241684913,
+      "weighted_precision": 0.6960519379953558,
+      "weighted_recall": 0.513502241684913,
+      "weighted_f1": 0.5744638102928016,
+      "precision_per_class": [
+        0.8088565022421524,
+        0.1405991979240387
+      ],
+      "recall_per_class": [
+        0.5430255895634721,
+        0.36812847436689317
+      ],
+      "f1_per_class": [
+        0.649804863404383,
+        0.20348241720723798
+      ],
+      "confusion_matrix": [
+        [
+          4329,
+          3643
+        ],
+        [
+          1023,
+          596
+        ]
+      ]
+    },
+    "timestamp": "2025-10-03T16:11:18.419563"
+  },
+  "benchmark_info": {
+    "model_path": "fake_news_bert_model.pth",
+    "tokenizer_path": "bert_tokenizer",
+    "device": "cuda",
+    "batch_size": 16,
+    "max_length": 512,
+    "timestamp": "2025-10-03T16:11:18.419563"
+  }
+}
